@@ -9,7 +9,7 @@ export default function AboutPage() {
       </Head>
       <h1>About Page</h1>
       <p>About Siwach.</p>
-      <Link href="/"></Link>
+      <Link href="/">Home</Link>
     </>
   );
 }
