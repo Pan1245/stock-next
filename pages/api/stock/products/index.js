@@ -15,8 +15,6 @@ export default async function handler(req, res) {
     res.setHander("Allow", ["GET", "POST"]);
     res.status(405).end("Method ${req.method} Not Allowed");
   }
-
-  res.status(200).json(docs);
 }
 
 const productSchema = new Schema({
