@@ -1,6 +1,6 @@
 import { connect, model, models, Schema } from "mongoose";
 const connectionString =
-  "mongodb+srv://user1:i1ma3KgyTAbkhZuL@cluster0.ze6mnns.mongodb.net/blogs";
+  "mongodb+srv://user1:i1ma3KgyTAbkhZuL@cluster0.ze6mnns.mongodb.net/stock";
 
 export default async function handler(req, res) {
   await connect(connectionString);
