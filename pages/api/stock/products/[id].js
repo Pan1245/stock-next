@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   const id = req.query.id;
   if (req.method === "GET") {
-    // Get only one document
+    // Get only one product
     const product = await Product.findOne({ _id: id });
     res.status(200).json(product);
   } else if (req.method === "DELETE") {
@@ -26,8 +26,8 @@ export default async function handler(req, res) {
 }
 
 const productSchema = new Schema({
-  code: String,
   name: String,
+  code: String,
   price: String,
 });
 
