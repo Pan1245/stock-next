@@ -9,7 +9,7 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("Deleting " + id);
+        window.location.reload(false);
       });
   }
   const [stock, setStock] = useState([]);
@@ -50,4 +50,10 @@ export default function Home() {
       <p></p>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(`http://localhost:3000/api/stock/products/`)
+  const stock = await res.json()
+  return { props: { stock } }
 }

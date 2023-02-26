@@ -1,5 +1,5 @@
 import { connect, model, models, Schema } from "mongoose";
-const connectionString = process.env.MONGODB_URI;
+const connectionString = process.env.MONGODB_URI_BLOGS;
 
 export default async function handler(req, res) {
   await connect(connectionString);
@@ -20,8 +20,8 @@ export default async function handler(req, res) {
     const updatedDoc = await Article.updateOne({ _id: id }, req.body);
     res.status(200).json(updatedDoc);
   } else {
-    res.setHander("Allow", ["GET", "DELETE"]);
-    res.status(405).end("Method ${req.method} Not Allowed");
+    res.setHeader("Allow", ["GET", "DELETE"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
 
@@ -30,5 +30,4 @@ const articleSchema = new Schema({
   content: String,
 });
 
-console.log("Mongoose Models", models);
 const Article = models?.article || model("article", articleSchema);

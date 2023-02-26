@@ -1,19 +1,22 @@
 import { connect, model, models, Schema } from "mongoose";
 const connectionString =
-  "mongodb+srv://user1:i1ma3KgyTAbkhZuL@cluster0.ze6mnns.mongodb.net/stock";
+  "mongodb+srv://user1:jZw5I9q20qi07FMz@cluster0.ze6mnns.mongodb.net/stock";
 
 export default async function handler(req, res) {
   await connect(connectionString);
+  console.log("req.method: ", req.method);
 
   if (req.method === "GET") {
-    const doc = await Product.find();
-    res.status(200).json(doc);
+    const products = await Article.find();
+    res.status(200).json(products);
   } else if (req.method === "POST") {
-    const doc = await Product.create(req.body);
-    res.status(201).json(doc);
+    console.log(typeof req.body);
+    // res.status(200).json(req.body)
+    const product = await Article.create(req.body);
+    res.status(201).json(product);
   } else {
-    res.setHander("Allow", ["GET", "POST"]);
-    res.status(405).end("Method ${req.method} Not Allowed");
+    res.setHeader("Allow", ["GET", "POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
 
