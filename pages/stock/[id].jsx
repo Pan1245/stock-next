@@ -28,7 +28,7 @@ export default function Stock({ stock }) {
 export async function getServerSideProps({ params }) {
   console.debug("params", params);
   const res = await fetch(
-    `${APIURL}${params.id}`
+    `${process.env.APIURL}${params.id}`
   );
   const stock = await res.json();
   console.debug("stock 1", stock);
