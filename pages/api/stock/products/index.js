@@ -23,4 +23,4 @@ const productSchema = new Schema({
   price: String,
 });
 
-const Product = models?.Product || model("product", productSchema);
+const Product = models?.product || model("product", productSchema);

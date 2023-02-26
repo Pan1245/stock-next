@@ -1,22 +1,22 @@
 import { connect, model, models, Schema } from "mongoose";
-const connectionString =
-  "mongodb+srv://user1:i1ma3KgyTAbkhZuL@cluster0.ze6mnns.mongodb.net/blogs";
+const connectionString = process.env.MONGODB_URI;
 
 export default async function handler(req, res) {
   await connect(connectionString);
+  console.log("req.method: ", req.method);
 
   if (req.method === "GET") {
-    const doc = await Article.find();
-    res.status(200).json(doc);
+    const docs = await Article.find();
+    res.status(200).json(docs);
   } else if (req.method === "POST") {
+    console.log(typeof req.body);
+    // res.status(200).json(req.body)
     const doc = await Article.create(req.body);
     res.status(201).json(doc);
   } else {
-    res.setHander("Allow", ["GET", "POST"]);
-    res.status(405).end("Method ${req.method} Not Allowed");
+    res.setHeader("Allow", ["GET", "POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-
-  res.status(200).json(docs);
 }
 
 const articleSchema = new Schema({
@@ -24,4 +24,5 @@ const articleSchema = new Schema({
   content: String,
 });
 
-const Article = models?.Article || model("article", articleSchema);
+console.log("Mongoose Models", models);
+const Article = models?.article || model("article", articleSchema);
