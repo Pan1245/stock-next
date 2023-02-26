@@ -16,7 +16,8 @@ export default function Stock({ stock }) {
       <Head>
         <title>{stock.name}</title>
       </Head>
-      <h1>{stock.code}</h1>
+      <h1>{stock.name}</h1>
+      <p>{stock.code}</p>
       <p>{stock.price}</p>
       <Link href="/stock">Back</Link>
     </>

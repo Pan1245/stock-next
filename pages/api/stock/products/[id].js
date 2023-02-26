@@ -1,6 +1,5 @@
 import { connect, model, models, Schema } from "mongoose";
-const connectionString =
-  "mongodb+srv://user1:jZw5I9q20qi07FMz@cluster0.ze6mnns.mongodb.net/stock";
+const connectionString = process.env.MONGODB_URI_STOCK;
 
 export default async function handler(req, res) {
   await connect(connectionString);
@@ -10,15 +9,15 @@ export default async function handler(req, res) {
   const id = req.query.id;
   if (req.method === "GET") {
     // Get only one document
-    const product = await Article.findOne({ _id: id });
+    const product = await Product.findOne({ _id: id });
     res.status(200).json(product);
   } else if (req.method === "DELETE") {
-    const deletedProduct = await Article.deleteOne({ _id: id });
+    const deletedProduct = await Product.deleteOne({ _id: id });
     res.status(200).json(deletedProduct);
   } else if (req.method === "PUT") {
     console.log("id", req.query.id);
     console.log(req.body);
-    const updatedProduct = await Article.updateOne({ _id: id }, req.body);
+    const updatedProduct = await Product.updateOne({ _id: id }, req.body);
     res.status(200).json(updatedProduct);
   } else {
     res.setHeader("Allow", ["GET", "DELETE"]);
