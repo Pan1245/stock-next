@@ -26,9 +26,7 @@ export default function Blog({ blog }) {
 // STEP 1: This function will be executed at the server before loading the page.
 export async function getServerSideProps({ params }) {
   console.debug("params", params);
-  const res = await fetch(
-    `${process.env.APIURL}blogs/articles/${params.id}`
-  );
+  const res = await fetch(`${process.env.APIURL}blogs/articles/${params.id}`);
   const blog = await res.json();
   console.debug("blog 1", blog);
   return { props: { blog } };
