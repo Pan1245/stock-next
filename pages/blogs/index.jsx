@@ -31,6 +31,9 @@ export default function Home() {
         <title>Blogs</title>
       </Head>
       <h1>Blogs</h1>
+      <p style={{ margin: "0.4rem" }}>
+        <Link href="/blogs/add">+New Blog</Link>
+      </p>
       <table>
         <tbody>
           {blogs.map((blog) => {
@@ -39,8 +42,13 @@ export default function Home() {
                 <td>
                   <Link href={`/blogs/${blog._id}`}>{blog.title}</Link>
                 </td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>
-                  <button onClick={() => deleteBlog(blog._id)}>Delete</button>{" "}
+                  <button href={`/blogs/update/${blog._id}`}>Update</button>
+                  &nbsp;&nbsp;&nbsp;
+                  <button onClick={() => deleteBlog(blog._id)}>
+                    Delete
+                  </button>{" "}
                 </td>
               </tr>
             );
@@ -53,7 +61,7 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${process.env.APIURL}blogs/articles/`)
-  const blogs = await res.json()
-  return { props: { blogs } }
+  const res = await fetch(`${process.env.APIURL}blogs/articles/`);
+  const blogs = await res.json();
+  return { props: { blogs } };
 }
