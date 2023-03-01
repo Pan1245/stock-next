@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   function deleteBlog(id) {
-    fetch(`${process.env.APIURL}blogs/articles/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API}blogs/articles/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -61,7 +61,7 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${process.env.APIURL}blogs/articles/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}blogs/articles/`);
   const blogs = await res.json();
   return { props: { blogs } };
 }
