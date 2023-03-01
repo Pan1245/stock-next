@@ -61,6 +61,7 @@ export default function Home() {
 }
 
 export async function getServerSideProps() {
+  console.debug(`fetching from ${process.env.NEXT_PUBLIC_API}blogs/articles/`);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API}blogs/articles/`);
   const blogs = await res.json();
   return { props: { blogs } };
